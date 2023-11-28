@@ -1,32 +1,34 @@
-import random
-
 # How long sleep between tx
 MIN_SLEEP = 10
-MAX_SLEEP = 20
+MAX_SLEEP = 15
 
 USE_PROXY = False
 USE_SHUFFLE = True
 
 CHECK_GWEI  = True
-MAX_GWEI    = 30
+MAX_GWEI    = 55
 
-
-
-# False or 2023-08-15 22:36 format
+# False or '2023-08-15 22:36' format
 SCHEDULE_TIME = False
+
+
+USE_REF=False
+
+
+
 
 # How much should left on each wallet after swap/bridge/transfer
 MIN_BALANCE = {
-    'ethereum': 0.0022,
-    'optimism': 0.0002,
-    'bsc': 0.0005,
+    'ethereum': 0.0019,
+    'optimism':  0.0002,
+    'bsc': 0.0002,
     'polygon': 0.01,
     'polygon_zkevm': 0.00009,
-    'arbitrum': 0.0002,
+    'arbitrum': '0.00015-0.00017',
     'avalanche': 0.001,
     'fantom': 0.05,
     'nova': 0.001,
-    'zksync': '0.0015-0.0025',
+    'zksync': '0.0015-0.0017',
     'coredao': 0.01,
     'moonriver': 0.00001,
     'metis': 0.00001,
@@ -37,36 +39,36 @@ MIN_BALANCE = {
 
 
 # Minimal transaction amount
-MIN_TRANSACTION_AMOUNT = 0.000001
+MIN_TRANSACTION_AMOUNT = 0.0001
 
 # How many times should retry if tx failed
-MAX_RETRIES = 8
-# okx | bitget
-DEFAULT_CEX = 'okx'
+MAX_RETRIES = 2
 
-GAS_LIMIT_COF=0.7
+# okx | bitget
+DEFAULT_CEX='okx'
+
+
+GAS_LIMIT_COF=0.8
 
 INCH_API_KEY=''
 
-USE_REF=True
-
-
 #==========ZK VOLUME CONFIG==============
-ZKSYNC_ETH_AMOUNT_PER_ACC = 0.015
+ZKSYNC_ETH_AMOUNT_PER_ACC = 2.2
 VOLUME_REPEAT=1
-# 13 Max for now
 MAX_SWAPS_PER_REPEAT=False
 # across|orbiter|random
 USE_BRIDGE='across'
 # arbitrum|optimism|random
 BRIDGE_NETWORK='arbitrum'
+# =======================================
 
-# '1-3' || '2'
-UNUSED_REPEAT='1-3'
+UNUSED_REPEAT='1'
 
 
 
-USE_CSV=False
+USE_CSV=True
+
+
 
 CHAINS = {
     'ethereum': {
@@ -216,7 +218,14 @@ CHAINS = {
         'token': 'ETH',
         'chain_id':8453
     },
+    'scroll': {
+        'rpc': 'https://rpc.scroll.io',
+        'scan': 'https://scrollscan.com/tx',
+        'token': 'ETH',
+        'chain_id': 534352
+    },
 }
+
 
 TESTNET_CHAINS = {
     'goerly': {
@@ -245,7 +254,6 @@ CURRENCY_MAP = {
     15: 'milli',
     18: 'ether'
 }
-
 
 
 NATIVE_TOKEN_ADDRESS = '0xEeeeeEeeeEeEeeEeEeEeeEEEeeeeEeeeeeeeEEeE'
