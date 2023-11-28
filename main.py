@@ -2,14 +2,14 @@ from config.multiple_routes import USE_FUNCTIONS
 from config.swap_routes import ROUTES
 from helpers.cli import *
 from helpers.factory import run_random_swap, run_multiple, run_unused_fn
+from helpers.settings_helper import get_own_contract_address
 from modules.balance.module import interface_check_balance
 from modules.contracts.module import interface_contracts
 from modules.exchange_withdraw.module import interface_exchange_withdraw
 from modules.orbiter_bridge.module import interface_orbiter_bridge
 from modules.swaps.module import interface_swaps
 from modules.transfer.module import interface_transfer
-from config.settings import  ZKSYNC_ETH_AMOUNT_PER_ACC
-from modules.withdraw_block.module import interface_withdraw
+
 
 if __name__ == '__main__':
     try:
@@ -27,7 +27,6 @@ if __name__ == '__main__':
             cprint(f'-------- Own Contracts --------', 'blue')
             cprint(f'6. Interact  with contracts', 'yellow')
 
-            cprint(f'7. Withdraw at block', 'yellow')
 
 
 
@@ -80,9 +79,6 @@ if __name__ == '__main__':
                 break
 
 
-            elif option == '7':
-                interface_withdraw()
-                break
 
 
             # elif option == '11':

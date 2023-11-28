@@ -32,6 +32,7 @@ MIN_BALANCE = {
     'metis': 0.00001,
     'linea': 0.002,
     'base': 0.00007,
+    'scroll': 0.0007,
 }
 
 

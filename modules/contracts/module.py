@@ -1,5 +1,7 @@
 from termcolor import cprint
 
+from helpers.cli import print_input_amounts_range
+from helpers.factory import run_script
 from modules.contracts.functions import *
 
 
@@ -7,8 +9,9 @@ def interface_contracts():
     try:
         while True:
             cprint(f'Select an action:', 'yellow')
-            cprint(f'1. Swap tokens / mute.io', 'yellow')
-            cprint(f'2. Swap tokens / zkswap.finance', 'yellow')
+            cprint(f'1. Deposit to contract', 'yellow')
+            cprint(f'2. Withdraw from contract', 'yellow')
+            cprint(f'3. Claim rewards', 'yellow')
 
 
 
@@ -20,11 +23,18 @@ def interface_contracts():
                 break
 
             elif option == '1':
+                amount_str = print_input_amounts_range('Swap amount')
+                run_script(stake, 'scroll', amount_str, [])
                 break
 
 
             elif option == '2':
+                run_script(withdraw, 'scroll',0, [])
 
+                break
+
+            elif option == '3':
+                run_script(claim, 'scroll', 0, [])
 
                 break
 
