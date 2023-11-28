@@ -23,7 +23,7 @@ def interface_contracts():
                 break
 
             elif option == '1':
-                amount_str = print_input_amounts_range('Swap amount')
+                amount_str = print_input_amounts_range('Deposit amount')
                 run_script(stake, 'scroll', amount_str, [])
                 break
 

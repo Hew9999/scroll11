@@ -16,7 +16,8 @@ def stake(web3, private_key, _amount):
     address_contract,type_contract = get_own_contract_address(private_key)
 
 
-    abi= DEPOSIT_ABI if type_contract=='Staking' else STAKE_ABI
+
+    abi= STAKE_ABI if type_contract=='Staking' else DEPOSIT_ABI
 
     contract = web3.eth.contract(address=address_contract, abi=abi)
 
@@ -26,7 +27,9 @@ def stake(web3, private_key, _amount):
     balance = get_token_balance(web3, wallet)
     min_balance=get_min_balance(chain)
 
-    token_contract, decimals, symbol = check_data_token(web3, '')
+
+    decimals = 18
+    symbol = CHAINS[chain]['token']
 
 
 
@@ -51,7 +54,7 @@ def stake(web3, private_key, _amount):
 
             method=contract.functions.deposit(current_timestamp)
 
-        contract_txn = contract.functions.swapExactETHForTokens().build_transaction(
+        contract_txn = method.build_transaction(
             {
                 'from': wallet,
                 'nonce': web3.eth.get_transaction_count(wallet),
@@ -71,7 +74,7 @@ def withdraw(web3, private_key, _amount):
     address_contract,type_contract = get_own_contract_address(private_key)
 
 
-    abi= DEPOSIT_ABI if type_contract=='Staking' else STAKE_ABI
+    abi= STAKE_ABI if type_contract=='Staking' else DEPOSIT_ABI
 
     contract = web3.eth.contract(address=address_contract, abi=abi)
 
