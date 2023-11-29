@@ -1,12 +1,9 @@
-from config.multiple_routes import USE_FUNCTIONS
-from config.swap_routes import ROUTES
 from helpers.cli import *
-from helpers.factory import run_random_swap, run_multiple, run_unused_fn
-from helpers.settings_helper import get_own_contract_address
 from modules.balance.module import interface_check_balance
 from modules.contracts.module import interface_contracts
 from modules.exchange_withdraw.module import interface_exchange_withdraw
 from modules.orbiter_bridge.module import interface_orbiter_bridge
+from modules.run_layer_zero.module import interface_usdv
 from modules.swaps.module import interface_swaps
 from modules.transfer.module import interface_transfer
 
@@ -22,31 +19,13 @@ if __name__ == '__main__':
 
             cprint(f'-------- BRIDGE/SWAP --------', 'blue')
             cprint(f'4. Orbiter Bridge', 'yellow')
-            cprint(f'5. Swaps JediSwap/MySwap/10kSwap...', 'yellow')
+            cprint(f'5. Swaps In dev...', 'yellow')
 
             cprint(f'-------- Own Contracts --------', 'blue')
             cprint(f'6. Interact  with contracts', 'yellow')
 
-
-
-
-            # cprint(f'---------- VOLUME wallet by wallet ----------', 'blue')
-            # cprint(f'11. View volume options',
-            #        'yellow')
-            #
-            # cprint(f'---------- Random Swaps ----------', 'blue')
-            # cprint(f'12. Swap ETH <=> Random Token / Random Dex',
-            #        'yellow')
-            #
-            # cprint(f'---------- Multiple Functions ----------', 'blue')
-            # cprint(f'13. Run multiple functions configured in config/multiple_routes.py',
-            #        'yellow')
-            #
-            # cprint(f'---------- Unused Functions ----------', 'blue')
-            # cprint(f'14. Find and run unused contract for wallet ',
-            #        'yellow')
-
-            # cprint(f'24. Starknet ETH: OKX > Starknet > {STARKNET_TX_REPEATS} Swaps > OKX', 'yellow')
+            cprint(f'-------- USDV Stargate --------', 'blue')
+            cprint(f'7. Bridge USDT to USDV', 'yellow')
 
             option = input("> ")
 
@@ -79,22 +58,13 @@ if __name__ == '__main__':
                 break
 
 
+            elif option == '7':
+                interface_usdv()
+                break
 
 
-            # elif option == '11':
-            #     interface_zksync_volume()
-            #     break
-            # elif option == '12':
-            #     amount_str = print_input_amounts_range('Swap amount')
-            #     run_random_swap(ROUTES, 'zksync', amount_str)
-            # elif option == '13':
-            #     run_multiple(USE_FUNCTIONS, 'zksync')
-            #     break
-            #
-            #
-            # elif option == '14':
-            #     run_unused_fn('zksync')
-            #     break
+
+
 
 
             else:

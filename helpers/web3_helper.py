@@ -12,6 +12,8 @@ from helpers.functions import sleeping, wei_to_int, int_to_wei
 import requests
 from loguru import logger
 
+from modules.run_layer_zero.config import LZ_CHAIN_IDS
+
 
 def approve_token(web3, private_key, chain, token_address, spender, retry=0):
     try:
@@ -134,8 +136,11 @@ def check_data_token(web3, token_address, abi=None):
 
     try:
         token_contract = web3.eth.contract(address=web3.to_checksum_address(token_address), abi=abi)
+
         decimals = token_contract.functions.decimals().call()
+
         symbol = token_contract.functions.symbol().call()
+
         return token_contract, decimals, symbol
 
     except Exception as error:
@@ -144,8 +149,11 @@ def check_data_token(web3, token_address, abi=None):
 
 def check_allowance(web3, token_address, wallet, spender):
     try:
+
         contract = web3.eth.contract(address=web3.to_checksum_address(token_address), abi=get_erc20_abi())
+
         amount_approved = contract.functions.allowance(wallet, spender).call()
+
         return amount_approved
 
     except Exception as error:
@@ -259,3 +267,27 @@ def wait_gas():
             logger.info(f'Сurrent_gas : {current_gas} > {MAX_GWEI}')
             time.sleep(100)
         else: break
+
+
+def stargate_lz_fee(wallet, from_chain, to_chain, bridge_contract, extra_gas=0):
+    while True:
+        try:
+            if from_chain == 'kava':
+                result = bridge_contract.functions.estimateSendTokensFee(
+                    LZ_CHAIN_IDS[to_chain],
+                    False,
+                    '0x',
+                ).call()
+            else:
+                result = bridge_contract.functions.quoteLayerZeroFee(
+                    LZ_CHAIN_IDS[to_chain],
+                    1,
+                    wallet,
+                    '0x',
+                    [extra_gas, 0, wallet]
+                ).call()
+            return int(result[0])
+
+        except Exception as error:
+            cprint(f'{STR_CANCEL} Error: {error}.', 'red')
+            time.sleep(2)
