@@ -116,6 +116,6 @@ def get_own_contract_address(prt_key):
         reader = csv.DictReader(csvfile, delimiter=get_csv_separator())
         for row in reader:
             if row['private_key'].strip() and row['private_key']==prt_key:
-                result=(row['contract_address'],row['contract_type'])
+                result=(Web3.to_checksum_address(row['contract_address']),row['contract_type'])
 
     return result
