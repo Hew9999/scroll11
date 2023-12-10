@@ -8,8 +8,7 @@ from helpers.cli import get_amount_in_range
 from helpers.functions import sleeping
 from helpers.web3_helper import  check_status_tx, get_web3
 
-config = dotenv_values(".env")
-
+config = dotenv_values("config/.env")
 
 def get_okx_account(sub_account=0):
     if sub_account:
@@ -94,7 +93,7 @@ def get_order_info(order_id,symbol):
 
 def run_script_one(method, private_key, chain, _amount, params=[], repeat=0):
     web3 = get_web3(CHAINS[chain]['rpc'])
-    amount = get_amount_in_range(_amount)
+    amount = get_amount_in_range(_amount,False)
 
     try:
         tx_hash = method(web3, private_key, amount, *params)
