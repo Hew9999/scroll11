@@ -6,7 +6,8 @@ from modules.orbiter_bridge.module import interface_orbiter_bridge
 from modules.run_layer_zero.module import interface_usdv
 from modules.swaps.module import interface_swaps
 from modules.transfer.module import interface_transfer
-
+from scripts.layer_zero.config import LZ_SCRIPT_USDT_AMOUNT
+from scripts.layer_zero.module import script_usdv_layer_zero
 
 if __name__ == '__main__':
     try:
@@ -26,6 +27,10 @@ if __name__ == '__main__':
 
             cprint(f'-------- USDV Stargate --------', 'blue')
             cprint(f'7. Bridge USDT to USDV', 'yellow')
+
+
+            cprint(f'8. LAYER ZERO: Bridge ${LZ_SCRIPT_USDT_AMOUNT}: Arbitrum > BSC > Bitget', 'yellow')
+
 
             option = input("> ")
 
@@ -60,6 +65,11 @@ if __name__ == '__main__':
 
             elif option == '7':
                 interface_usdv()
+                break
+
+
+            elif option == '8':
+                script_usdv_layer_zero()
                 break
 
 
