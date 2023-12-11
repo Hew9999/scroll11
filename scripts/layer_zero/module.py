@@ -16,6 +16,7 @@ def script_usdv_layer_zero():
 
     recipients = get_recipients('bitget_address')
     private_keys = get_private_keys()
+
     if len(recipients) != len(private_keys):
         cprint("Wrong recipients count in recipients.txt, should be 1 sender = 1 recipient", "red")
         return
@@ -27,11 +28,12 @@ def script_usdv_layer_zero():
     recipient_map = map_recipients(recipients, private_keys)
     web3_bsc = Web3(Web3.HTTPProvider(CHAINS['bsc']['rpc']))
     web3_arbitrum = Web3(Web3.HTTPProvider(CHAINS['arbitrum']['rpc']))
-
     try:
         wallet_num = 0
-        for private_key in get_private_keys():
+        for item in private_keys:
             wallet_num += 1
+            private_key = item['private_key']
+
             run_usdv_one_wallet(web3_bsc, web3_arbitrum, private_key, recipient_map[private_key], wallet_num)
             sleeping(MIN_SLEEP, MAX_SLEEP)
     except KeyboardInterrupt:
@@ -41,7 +43,6 @@ def script_usdv_layer_zero():
 
 def run_usdv_one_wallet(web3_bsc, web3_arbitrum, private_key, recipient_wallet, wallet_num):
     amount = round(LZ_SCRIPT_USDT_AMOUNT - random.uniform(0, 2), 2)
-
     # ------------------ Withdraw ------------------
     wallet_address = web3_bsc.eth.account.from_key(private_key).address
     cprint(f"/-- Withdraw {amount} USDT from bitget to wallet: {wallet_address} [{wallet_num}]", "blue")
