@@ -42,11 +42,11 @@ def script_usdv_layer_zero():
 
 
 def run_usdv_one_wallet(web3_bsc, web3_arbitrum, private_key, recipient_wallet, wallet_num):
-    amount = round(LZ_SCRIPT_USDT_AMOUNT - random.uniform(0, 2), 2)
+    amount = round(LZ_SCRIPT_USDT_AMOUNT - random.uniform(0, 1), 2)
     # ------------------ Withdraw ------------------
     wallet_address = web3_bsc.eth.account.from_key(private_key).address
     cprint(f"/-- Withdraw {amount} USDT from bitget to wallet: {wallet_address} [{wallet_num}]", "blue")
-    call_exchange_withdraw(wallet_address, round(amount + 0.2, 2), 'USDT', 'ArbitrumOne', 'bitget')
+    call_exchange_withdraw(wallet_address, round(amount + 0.8, 2), 'USDT', 'ArbitrumOne', 'bitget')
 
     sleeping(MIN_SLEEP, MAX_SLEEP)
 

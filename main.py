@@ -8,6 +8,8 @@ from modules.swaps.module import interface_swaps
 from modules.transfer.module import interface_transfer
 from scripts.layer_zero.config import LZ_SCRIPT_USDT_AMOUNT
 from scripts.layer_zero.module import script_usdv_layer_zero
+from scripts.orbiter.config import ETH_AMOUNT
+from scripts.orbiter.module import script_orbiter
 
 if __name__ == '__main__':
     try:
@@ -30,6 +32,10 @@ if __name__ == '__main__':
 
 
             cprint(f'8. LAYER ZERO: Bridge ${LZ_SCRIPT_USDT_AMOUNT}: Arbitrum > BSC > Bitget', 'yellow')
+            cprint(f'-------- Orbiter Promotion --------', 'blue')
+
+            cprint(f'9. Orbiter: Bridge {ETH_AMOUNT}ETH: OKX->[LINEA->RANDOM NETWORKS->LINEA]->OKX', 'yellow')
+
 
 
             option = input("> ")
@@ -70,6 +76,10 @@ if __name__ == '__main__':
 
             elif option == '8':
                 script_usdv_layer_zero()
+                break
+
+            elif option == '9':
+                script_orbiter()
                 break
 
 

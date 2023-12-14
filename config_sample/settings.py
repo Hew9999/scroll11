@@ -23,18 +23,18 @@ MIN_BALANCE = {
     'optimism':  0.0002,
     'bsc': 0.0002,
     'polygon': 0.01,
-    'polygon_zkevm': 0.00009,
+    'polygon_zkevm': '0.005-0.006',
     'arbitrum': '0.00015-0.00017',
     'avalanche': 0.001,
     'fantom': 0.05,
     'nova': 0.001,
-    'zksync': '0.0015-0.0017',
+    'zksync': '0.005-0.006',
     'coredao': 0.01,
     'moonriver': 0.00001,
     'metis': 0.00001,
-    'linea': 0.002,
-    'base': 0.00007,
-    'scroll': 0.0007,
+    'linea': '0.005-0.006',
+    'base': '0.005-0.006',
+    'scroll': '0.005-0.006',
 }
 
 

@@ -12,6 +12,7 @@ ORBITER_AMOUNT = {
     'starknet': 0.000000000000009004,
     'linea': 0.000000000000009023,
     'scroll':0.000000000000009019,
+    'base':0.000000000000009021,
 }
 
 ORBITER_AMOUNT_STR = {
@@ -26,6 +27,7 @@ ORBITER_AMOUNT_STR = {
     'starknet': '9004',
     'linea': '9023',
     "scroll": "9019",
+    "base": "9021",
 
 }
 
