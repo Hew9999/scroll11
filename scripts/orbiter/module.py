@@ -38,11 +38,7 @@ def script_orbiter():
             run_orbiter_bridge(web3_linea, private_key, recipient_map[private_key], wallet_num)
             sleeping(MIN_SLEEP, MAX_SLEEP)
     except KeyboardInterrupt as error:
-        exc_type, exc_value, exc_traceback = sys.exc_info()
-
-        traceback_details = traceback.format_exception(exc_type, exc_value, exc_traceback)
-        full_track_error = "".join(traceback_details)
-        logger.error(full_track_error)
+        cprint(f' Exit, bye bye\n', 'red')
         raise SystemExit
 
 
@@ -59,7 +55,7 @@ def run_orbiter_bridge(web3_linea, private_key, recipient_wallet, wallet_num):
     # ------------------ Start Bridge ------------------
     random.shuffle(NETWORKS)
     for bridge_network in NETWORKS:
-        amount = check_wait_web3_balance(web3_linea, 'linea', wallet_address, '', amount * 98)
+        amount = check_wait_web3_balance(web3_linea, 'linea', wallet_address, '', amount * 0.98)
         #  balance left linea
         amount = amount - get_min_balance('linea')
 
@@ -69,14 +65,14 @@ def run_orbiter_bridge(web3_linea, private_key, recipient_wallet, wallet_num):
 
         # BRIDGE FROM RANDOM NETWORK TO LINEA
         web3_random = Web3(Web3.HTTPProvider(CHAINS[bridge_network]['rpc']))
-        amount = check_wait_web3_balance(web3_random, bridge_network, wallet_address, '', amount * 98)
+        amount = check_wait_web3_balance(web3_random, bridge_network, wallet_address, '', amount * 0.98)
         params2 = [bridge_network, 'linea']
         #  balance left on random network
         amount = amount - get_min_balance(bridge_network)
         run_script_one(orbiter_eth_bridge, private_key, bridge_network, str(amount), params2)
 
     # ------------------ Withdraw to OKX ------------------
-    amount = check_wait_web3_balance(web3_linea, 'linea', wallet_address, '', amount * 98)
+    amount = check_wait_web3_balance(web3_linea, 'linea', wallet_address, '', amount * 0.98)
     amount = amount - get_min_balance('linea')
     sleeping(MIN_SLEEP, MAX_SLEEP)
     cprint("/-- Withdraw to OKX", "blue")

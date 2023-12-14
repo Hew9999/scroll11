@@ -51,7 +51,7 @@ def run_usdv_one_wallet(web3_bsc, web3_arbitrum, private_key, recipient_wallet, 
     sleeping(MIN_SLEEP, MAX_SLEEP)
 
     # ------------------ Check Arbitrum balance ------------------
-    check_wait_web3_balance(web3_arbitrum, 'arbitrum', wallet_address, ARB_USDT_ADDRESS, amount)
+    check_wait_web3_balance(web3_arbitrum, 'arbitrum', wallet_address, ARB_USDT_ADDRESS, amount*0.99)
 
     sleeping(2, 3)
 

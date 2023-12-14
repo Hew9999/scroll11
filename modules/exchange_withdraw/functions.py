@@ -13,9 +13,11 @@ def call_exchange_withdraw(wallet_address: str, amount: float, token: str, netwo
         params = {}
 
         if cex == 'okx':
-            network = network.split("-", 1)[1]
+            network = network.split("-", 1)
+            network=network[0] if len(network) == 1 else network[1]
             account.load_markets()
             networks = account.currencies[token]['networks']
+
             params['fee'] = networks[network]['fee']
             if network == 'CELO':
                 params['fee'] = 0.0008
