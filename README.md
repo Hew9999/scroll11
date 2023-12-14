@@ -12,7 +12,7 @@
 ### 1. Клонируем проект с github
 
 ```
-git clone https://gitlab.com/darcksday/zk-sync-aio.git
+git clone https://github.com/darcksday/scroll
 ```
 
 ### 2. Переходим в папку с проектом и переименовываем папку с конфигами
