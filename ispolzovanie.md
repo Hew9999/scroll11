@@ -51,7 +51,13 @@ USDT уже должно быть на балансе выбраной сети.
 * из linea на ОКХ
 
 Мршрут генериться рандомно. Убрать или добавить сеть а также указать суму <mark style="color:red;">(max 2 ETH)</mark> можно в\
-**scripts/orbiter/config.py**
+**scripts/orbiter/config.py.** Так же в конфиге можно включить задевание лендингов в разных сетях розкоментовав код в переменной ADDITIONAL\_FUNCTIONS
+
+* zksync - eralend
+* scroll-laverbank
+* zkevm - 0vix
+
+
 
 Каждый бридж обойдется в ±1.5$
 
