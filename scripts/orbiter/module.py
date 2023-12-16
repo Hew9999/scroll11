@@ -100,5 +100,5 @@ def run_orbiter_bridge_eth(web3_linea, item, recipient_wallet):
                         account.transfer("ETH", acc_balance, config[f'OKX_SUB{sub_account_num}_NAME'], 'master')
                         time.sleep(2)
                         break
-        sleeping(MIN_SLEEP, MAX_SLEEP)
+        sleeping(MIN_SLEEP*2, MAX_SLEEP*2)
         continue

@@ -7,21 +7,21 @@ ETH_AMOUNT = 1.97
 NETWORKS=[
     'zksync',
     'scroll',
-    'nova',
+    # 'nova',
     'polygon_zkevm',
-    'base',
+    # 'base',
 ]
 
 ADDITIONAL_FUNCTIONS={
-    # 'zksync':[
-    #     [supply_eth_eralend, withdraw_eth_eralend],
-    # ],
-    # 'scroll':[
-    #     [supply_eth_layerbank, withdraw_eth_layerbank],
-    # ],
-    # 'polygon_zkevm':[
-    #     [supply_eth_0vix, withdraw_supply_eth_0vix],
-    # ],
+    'zksync':[
+        [supply_eth_eralend, withdraw_eth_eralend],
+    ],
+    'scroll':[
+        [supply_eth_layerbank, withdraw_eth_layerbank],
+    ],
+    'polygon_zkevm':[
+        [supply_eth_0vix, withdraw_supply_eth_0vix],
+    ],
 
 
 
