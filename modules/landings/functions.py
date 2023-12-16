@@ -177,7 +177,7 @@ def supply_eth_0vix(web3, private_key, _amount):
     chain = 'polygon_zkevm'
     address_contract = web3.to_checksum_address(ZERO_VIX_CONTRACT)
     wallet = web3.to_checksum_address(web3.eth.account.from_key(private_key).address)
-    cprint(f'/-- Sypply ETH, wallet {wallet} -->', 'green')
+    cprint(f'/-- Supply ETH, wallet {wallet} -->', 'green')
 
     decimals = 18
     symbol = 'ETH'
