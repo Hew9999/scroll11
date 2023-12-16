@@ -1,4 +1,6 @@
+from config.multiple_routes import USE_FUNCTIONS
 from helpers.cli import *
+from helpers.factory import run_multiple
 from modules.balance.module import interface_check_balance
 from modules.contracts.module import interface_contracts
 from modules.exchange_withdraw.module import interface_exchange_withdraw
@@ -8,8 +10,8 @@ from modules.swaps.module import interface_swaps
 from modules.transfer.module import interface_transfer
 from scripts.layer_zero.config import LZ_SCRIPT_USDT_AMOUNT
 from scripts.layer_zero.module import script_usdv_layer_zero
-from scripts.orbiter.config import ETH_AMOUNT
-from scripts.orbiter.module import script_orbiter
+from scripts.orbiter.config import ETH_AMOUNT, USDT_AMOUNT
+from scripts.orbiter.module import script_orbiter_eth, script_orbiter_usdt
 
 if __name__ == '__main__':
     try:
@@ -35,6 +37,7 @@ if __name__ == '__main__':
             cprint(f'-------- Orbiter Promotion --------', 'blue')
 
             cprint(f'9. Orbiter: Bridge {ETH_AMOUNT}ETH: OKX->[LINEA->RANDOM NETWORKS->LINEA]->OKX', 'yellow')
+            # cprint(f'10. Orbiter: Bridge {USDT_AMOUNT}USDC: OKX->OP[LINEA->RANDOM NETWORKS->LINEA]->OP->OKX', 'yellow')
 
 
 
@@ -79,11 +82,17 @@ if __name__ == '__main__':
                 break
 
             elif option == '9':
-                script_orbiter()
+                script_orbiter_eth()
+                break
+
+            elif option == '10':
+                # script_orbiter_usdt()
                 break
 
 
-
+            elif option == '13':
+                run_multiple(USE_FUNCTIONS, 'zksync')
+                break
 
 
 
