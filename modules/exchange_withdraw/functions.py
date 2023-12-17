@@ -1,52 +1,51 @@
 
 import ccxt
 
+from helpers.retry import retry
 from modules.exchange_withdraw.config import CEX_KEYS
 from modules.exchange_withdraw.cli import *
 
 
+@retry
 def call_exchange_withdraw(wallet_address: str, amount: float, token: str, network, cex: str = DEFAULT_CEX):
-    try:
-        # amount_ = round(random.uniform(amount_from, amount_to), 7)
-        cprint(f"/-- Start withdraw to {wallet_address} -->", "green")
-        account = get_ccxt(cex)
-        params = {}
+    # amount_ = round(random.uniform(amount_from, amount_to), 7)
+    cprint(f"/-- Start withdraw to {wallet_address} -->", "green")
+    account = get_ccxt(cex)
+    params = {}
 
-        if cex == 'okx':
-            network = network.split("-", 1)
-            network=network[0] if len(network) == 1 else network[1]
-            account.load_markets()
-            networks = account.currencies[token]['networks']
+    if cex == 'okx':
+        network = network.split("-", 1)
+        network=network[0] if len(network) == 1 else network[1]
+        account.load_markets()
+        networks = account.currencies[token]['networks']
 
-            params['fee'] = networks[network]['fee']
-            if network == 'CELO':
-                params['fee'] = 0.0008
-            params['pwd'] = CEX_KEYS[cex]['password']
+        params['fee'] = networks[network]['fee']
+        if network == 'CELO':
+            params['fee'] = 0.0008
+        params['pwd'] = CEX_KEYS[cex]['password']
 
-        if cex == 'bitget':
-            params = {'chain': network}
+    if cex == 'bitget':
+        params = {'chain': network}
 
-        # Harmony network
-        # if token == 'ONE':
-        #     wallet_address = util.convert_hex_to_one(wallet_address)
+    # Harmony network
+    # if token == 'ONE':
+    #     wallet_address = util.convert_hex_to_one(wallet_address)
 
 
-        # if token == 'KAVA':
-        #     wallet_address = eth_to_kava_address(wallet_address)
+    # if token == 'KAVA':
+    #     wallet_address = eth_to_kava_address(wallet_address)
 
-        params['network'] = network
-        account.withdraw(
-            code=token,
-            amount=amount,
-            address=wallet_address,
-            tag=None,
-            params=params
-        )
+    params['network'] = network
+    account.withdraw(
+        code=token,
+        amount=amount,
+        address=wallet_address,
+        tag=None,
+        params=params
+    )
 
-        cprint(f'{cex} withdraw {amount} {token} success => {wallet_address}', 'green')
+    cprint(f'{cex} withdraw {amount} {token} success => {wallet_address}', 'green')
 
-    except Exception as error:
-        cprint(f'{cex} withdraw {token} error: {str(error)}', 'red')
 
 
 def bitget_get_withdrawal_info(token):
