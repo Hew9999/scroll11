@@ -2,7 +2,7 @@ import time
 
 from loguru import logger
 
-MAX_RETRIES = 10
+MAX_RETRIES = 50
 
 
 def retry(func):
